@@ -17,6 +17,7 @@ export class ProfilePage {
   loading: Loading;
   profileForm: FormGroup;
   username: AbstractControl;
+  role: AbstractControl;
   firstName: AbstractControl;
   lastName: AbstractControl;
   gender: AbstractControl;
@@ -33,12 +34,14 @@ export class ProfilePage {
     private ngAuth: NgauthProvider) {
       this.profileForm = this.frmBuilder.group({
         'username': ['', Validators.compose([Validators.required, Validators.minLength(6)])],
+        'role':['',Validators.compose([Validators.required])],
         'firstName': ['', Validators.required],
         'lastName': ['', Validators.required],
         'gender': ['', Validators.required],
         'birthday': ['', Validators.required]
       });
       this.username = this.profileForm.controls['username'];
+      this.role = this.profileForm.controls['role'];
       this.firstName = this.profileForm.controls['firstName'];
       this.lastName = this.profileForm.controls['lastName'];
       this.gender = this.profileForm.controls['gender'];
@@ -52,10 +55,8 @@ export class ProfilePage {
       dismissOnPageChange: true
     });
     if(this.profileForm.valid) {
-      this.profile = {'username': this.username.value, 'firstName':this.firstName.value, 'lastName':this.lastName.value, 'gender':this.gender.value, 'birthday': this.birthday.value};
+      this.profile = {'username': this.username.value, 'role': this.role.value, 'firstName':this.firstName.value, 'lastName':this.lastName.value, 'gender':this.gender.value, 'birthday': this.birthday.value};
       this.ngAuth.createUserProfile(this.profile).subscribe( userRef => {
-        //console.log('inside profile.ts');
-        //console.log(userRef.id);
         this.navCtrl.setRoot(HomePage);
       }, userError => {
         this.loading.dismiss().then(() => {

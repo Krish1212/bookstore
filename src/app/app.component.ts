@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import { Nav, Platform, Events } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -14,21 +14,27 @@ import { ContactPage } from '../pages/contact/contact';
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any;
   @ViewChild(Nav) nav: Nav;
+  rootPage:any;
+  username:string;
+  firstName:string;
   pages:Array<{title:string, component:any}>;
 
   constructor(platform: Platform, 
     statusBar: StatusBar, 
     splashScreen: SplashScreen, 
     afAuth: AngularFireAuth, 
-    private ngAuth: NgauthProvider) {
+    private ngAuth: NgauthProvider,
+    private events:Events) {
     this.pages = [
       { title: 'My Profile', component: UprofilePage },
       { title: 'About', component: AboutPage },
       { title: 'Contact', component: ContactPage },
     ];
-
+    this.events.subscribe("myprofile", (userProfile) => {
+      this.username = userProfile.username;
+      this.firstName = userProfile.firstName;
+    });
     const authObserver = afAuth.authState.subscribe(user => {
       if (!user) {
         this.rootPage = 'login';

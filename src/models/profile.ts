@@ -4,4 +4,5 @@ export interface Profile {
     lastName: string,
     gender: string,
     birthday: Date,
+    role: string,
 }

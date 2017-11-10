@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, Loading, LoadingController, AlertController, MenuController, ToastController } from 'ionic-angular';
+import { NavController, Loading, LoadingController, AlertController, MenuController, ToastController, Events } from 'ionic-angular';
 
 import { NgauthProvider } from '../../providers/ngauth/ngauth';
 import { ShareProvider } from '../../providers/share/share';
@@ -17,7 +17,8 @@ export class HomePage {
     private alertCtrl: AlertController, 
     private menuCtrl: MenuController, 
     private toastCtrl: ToastController, 
-    private shareData: ShareProvider) {
+    private shareData: ShareProvider, 
+    private events:Events) {
       this.menuCtrl.enable(true);
       this.loading = this.loadingCtrl.create({
         spinner: 'bubbles',
@@ -49,7 +50,8 @@ export class HomePage {
   async getProfile() {
     await this.ngAuth.currentUserProfile().subscribe(uProfile => {
       this.userProfile = uProfile;
-      this.shareData.setProfile(this.userProfile);      
+      this.shareData.setProfile(this.userProfile);
+      this.events.publish("myprofile", this.userProfile);
       //console.log('from home: ' + JSON.stringify(this.userProfile));
     });
   }

@@ -8,10 +8,10 @@
         <ion-list>
             <ion-item>
                 <ion-thumbnail item-start>
-                    <img src="http://via.placeholder.com/50x50">
+                    <img src="http://via.placeholder.com/75/000000/ffffff?text=female">
                 </ion-thumbnail>
-                <h2>{{ (userProfile)?.username }}</h2>
-                <p>Hello {{ (userProfile)?.firstName }}
+                <h2>{{ username }}</h2>
+                <p>Hello {{ firstName }}</p>
             </ion-item>
             <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
             {{ p.title }}

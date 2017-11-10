@@ -32,6 +32,17 @@
     </ion-item>
 
     <ion-item>
+      <ion-label floating>Role</ion-label>
+      <ion-select #role formControlName="role" [class.invalid]="!profileForm.controls.role.valid">
+        <ion-option name="buyer">Buyer</ion-option>
+        <ion-option name="seller">Seller</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item class="error-message" *ngIf="!profileForm.controls.role.valid">
+      Role is required
+    </ion-item>
+
+    <ion-item>
       <ion-label floating>Gender</ion-label>
       <ion-select #gender formControlName="gender" [class.invalid]="!profileForm.controls.gender.valid">
         <ion-option name="male">Male</ion-option>

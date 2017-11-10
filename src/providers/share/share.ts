@@ -9,6 +9,7 @@ export class ShareProvider {
   firstName: string;
   lastName: string;
   gender: string;
+  role: string;
   birthday: Date;
 
   constructor() {
@@ -17,6 +18,7 @@ export class ShareProvider {
     this.firstName = userProfile.firstName;
     this.lastName = userProfile.lastName;
     this.gender = userProfile.gender;
+    this.role = userProfile.role;
     this.birthday = userProfile.birthday;
   }
 
@@ -25,7 +27,8 @@ export class ShareProvider {
           'firstName': this.firstName,
           'lastName': this.lastName,
           'gender': this.gender,
-          'birthday':this.birthday
+          'birthday':this.birthday,
+          'role':this.role,
       };
   }
 }
