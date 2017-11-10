@@ -1,0 +1,23 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>My Profile</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-item>
+    <p>First Name: {{ (userProfile)?.firstName }}</p>
+  </ion-item>
+  <ion-item>
+    <p>Last Name: {{ (userProfile)?.lastName }}</p>
+  </ion-item>
+  <ion-item>
+    <p>Gender: {{ (userProfile)?.gender }}</p>
+  </ion-item>
+  <ion-item>
+    <p>Birthday: {{ (userProfile)?.birthday }}</p>
+  </ion-item>
+</ion-content>

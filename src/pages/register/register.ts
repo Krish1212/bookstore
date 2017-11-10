@@ -52,7 +52,7 @@ export class RegisterPage {
         this.navCtrl.push('profile');
       }, authError => {
         this.loading.dismiss().then(() => {
-          console.log(authError);
+          //console.log(authError);
           let errorMessage: string = authError.message;
           if (authError.code === 'auth/weak-password' || authError.code === 'auth/email-already-in-use'){
             this.alertCtrl.create({

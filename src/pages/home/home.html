@@ -1,16 +1,21 @@
 <ion-header>
   <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
     <ion-title>
-      Ionic Blank
+      Book Store
     </ion-title>
     <ion-buttons end>
-      <button ion-button clear (click)="signOut()">Logout</button>
+      <button ion-button clear (click)="signOut()">
+        <ion-icon name="ios-log-out"></ion-icon>
+      </button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
   <ion-item>
-    <h3>Welcome {{ (user) }}</h3>
+    <h3>Welcome {{ (userProfile)?.username }}</h3>
   </ion-item>
 </ion-content>

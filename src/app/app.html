@@ -1,1 +1,23 @@
-<ion-nav [root]="rootPage"></ion-nav>
+<ion-menu [content]="mycontent" type="overlay">
+    <ion-header>
+        <ion-toolbar color="primary">
+            <ion-title>Menu</ion-title>
+        </ion-toolbar>
+    </ion-header>
+    <ion-content class="card-background-page">
+        <ion-list>
+            <ion-item>
+                <ion-thumbnail item-start>
+                    <img src="http://via.placeholder.com/50x50">
+                </ion-thumbnail>
+                <h2>{{ (userProfile)?.username }}</h2>
+                <p>Hello {{ (userProfile)?.firstName }}
+            </ion-item>
+            <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
+            {{ p.title }}
+            </button>
+            <button menuClose ion-item (click)="logout()">Logout</button>
+        </ion-list>
+    </ion-content>
+</ion-menu>
+<ion-nav [root]="rootPage" #mycontent swipeBackEnabled="false"></ion-nav>

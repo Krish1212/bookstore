@@ -8,14 +8,23 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 
 import { NgauthProvider } from '../providers/ngauth/ngauth';
+import { ShareProvider } from '../providers/share/share';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
+import { UprofilePage } from '../pages/uprofile/uprofile';
+import { AboutPage } from '../pages/about/about';
+import { ContactPage } from '../pages/contact/contact';
+
 import { FIREBASE_CONFIG } from './app.firebase.config';
+
 
 @NgModule({
   declarations: [
     MyApp,
-    HomePage
+    HomePage,
+    UprofilePage,
+    AboutPage,
+    ContactPage
   ],
   imports: [
     BrowserModule,
@@ -27,13 +36,17 @@ import { FIREBASE_CONFIG } from './app.firebase.config';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage
+    HomePage,
+    UprofilePage,
+    AboutPage,
+    ContactPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    NgauthProvider
+    NgauthProvider,
+    ShareProvider
   ]
 })
 export class AppModule {}

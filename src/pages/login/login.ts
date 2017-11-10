@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Loading, LoadingController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Loading, LoadingController, AlertController, MenuController } from 'ionic-angular';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 
 import { HomePage } from '../home/home';
@@ -27,17 +27,15 @@ export class LoginPage {
     private formBuilder: FormBuilder, 
     private loadingCtrl: LoadingController, 
     private ngAuth: NgauthProvider, 
-    private alertCtrl: AlertController) {
+    private alertCtrl: AlertController, 
+    private menuCtrl:MenuController) {
+      this.menuCtrl.enable(false);
       this.loginForm = this.formBuilder.group({
         'username': ['', Validators.compose([Validators.required,EmailValidator.isValid])],
         'password': ['', Validators.compose([Validators.minLength(6),Validators.required])]
       });
       this.username = this.loginForm.controls['username'];
       this.password = this.loginForm.controls['password'];
-  }
-
-  ionViewDidLoad() {
-    //console.log('ionViewDidLoad LoginPage');
   }
   login(){
     this.loading = this.loadingCtrl.create({
@@ -48,12 +46,12 @@ export class LoginPage {
     if(this.loginForm.valid){
       this.user = {'email': this.username.value, 'password': this.password.value};
       this.ngAuth.userLogin(this.user).subscribe(authUser => {
-        console.log(authUser);
+        //console.log('from login: ' + authUser);
         this.navCtrl.setRoot(HomePage);
         //this.navCtrl.push('profile');
       }, authError => {
         let errorMessage:string = authError.message;
-        console.log(authError);
+        //console.log('from login (error): ' + authError);
         this.loading.dismiss().then(() => {
           if(authError.code === 'auth/user-not-found'){
             let errorAlert = this.alertCtrl.create({

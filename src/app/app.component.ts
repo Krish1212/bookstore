@@ -1,20 +1,34 @@
-import { Component } from '@angular/core';
-import { Platform } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { AngularFireAuth } from 'angularfire2/auth';
 
+import { NgauthProvider } from '../providers/ngauth/ngauth';
 import { HomePage } from '../pages/home/home';
+import { UprofilePage } from '../pages/uprofile/uprofile';
+import { AboutPage } from '../pages/about/about';
+import { ContactPage } from '../pages/contact/contact';
+
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
   rootPage:any;
+  @ViewChild(Nav) nav: Nav;
+  pages:Array<{title:string, component:any}>;
 
   constructor(platform: Platform, 
     statusBar: StatusBar, 
     splashScreen: SplashScreen, 
-    afAuth: AngularFireAuth) {
+    afAuth: AngularFireAuth, 
+    private ngAuth: NgauthProvider) {
+    this.pages = [
+      { title: 'My Profile', component: UprofilePage },
+      { title: 'About', component: AboutPage },
+      { title: 'Contact', component: ContactPage },
+    ];
+
     const authObserver = afAuth.authState.subscribe(user => {
       if (!user) {
         this.rootPage = 'login';
@@ -30,5 +44,13 @@ export class MyApp {
       statusBar.styleDefault();
       splashScreen.hide();
     });
+  }
+  logout(){
+    this.ngAuth.userSignOut();
+    this.nav.setRoot('login');
+  }
+  openPage(page){
+    //console.log('from home: ' + page.component);
+    this.nav.push(page.component);
   }
 }

@@ -39,21 +39,24 @@ export class NgauthProvider {
   userSignOut(){
     return this.afAuth.auth.signOut();
   }
+  get currentUser():string {
+    return this.afAuth.auth.currentUser ? this.afAuth.auth.currentUser.uid : null;
+  }
 
   currentUserProfile() {
-    let userId = this.afAuth.auth.currentUser.uid;
-    let docRef = null;
-    if(this.afAuth.auth.currentUser) {
-      this.ngFirestore.collection(`profiles`).doc(userId).ref.get().then((doc) => {
-        if(doc.exists){
-          return doc.data();
-        }
-      }).catch((error) => {
-        return error;
-      });
-    } else {
-      return docRef;
-    }
+    let userId = this.currentUser;
+    return Observable.create(observer => {
+      if (userId) {
+        this.ngFirestore.collection(`profiles`).doc(userId).ref.get().then(userProfile => {
+          if(userProfile.exists) {
+            //console.log('from ngauth: ' + JSON.stringify(userProfile.data()));
+            observer.next(userProfile.data());
+          }
+        }).catch(error => {
+          observer.error(error);
+        });
+      }
+    });
   }
 
   createUserProfile(profile: Profile){
