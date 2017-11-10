@@ -18,6 +18,7 @@ export class MyApp {
   rootPage:any;
   username:string;
   firstName:string;
+  gender:string;
   pages:Array<{title:string, component:any}>;
 
   constructor(platform: Platform, 
@@ -34,6 +35,7 @@ export class MyApp {
     this.events.subscribe("myprofile", (userProfile) => {
       this.username = userProfile.username;
       this.firstName = userProfile.firstName;
+      this.gender = userProfile.gender;
     });
     const authObserver = afAuth.authState.subscribe(user => {
       if (!user) {
