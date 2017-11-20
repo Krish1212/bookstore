@@ -36,12 +36,14 @@
     <ion-item>
       <ion-label floating>Sales Price</ion-label>
       <ion-input *ngIf="platform.is('android')" inputMode="numeric" pattern="[0-9]" min="0" #salesprice formControlName="salesprice" type="number" [class.invalid]="!newEntryForm.controls.salesprice.valid && newEntryForm.controls.salesprice.touched"></ion-input>
+      <ion-input *ngIf="platform.is('ios')" inputMode="numeric" pattern="[0-9]" min="0" #salesprice formControlName="salesprice" type="tel" [class.invalid]="!newEntryForm.controls.salesprice.valid && newEntryForm.controls.salesprice.touched"></ion-input>
     </ion-item>
     <ion-item class="error-message" *ngIf="newEntryForm.controls.salesprice.hasError('required') && newEntryForm.controls.salesprice.touched">
       Sales Price is required and should be a valid number
     </ion-item>
     <ion-item>
       <ion-label floating>Lending Price</ion-label>
+      <ion-input *ngIf="platform.is('android')" inputMode="numeric" pattern="[0-9]" min="0" #lendprice formControlName="lendprice" type="number" [class.invalid]="!newEntryForm.controls.lendprice.valid && newEntryForm.controls.lendprice.touched"></ion-input>
       <ion-input *ngIf="platform.is('ios')" inputMode="numeric" pattern="[0-9]" min="0" #lendprice formControlName="lendprice" type="tel" [class.invalid]="!newEntryForm.controls.lendprice.valid && newEntryForm.controls.lendprice.touched"></ion-input>
     </ion-item>
     <ion-item class="error-message" *ngIf="newEntryForm.controls.lendprice.hasError('required') && newEntryForm.controls.lendprice.touched">
