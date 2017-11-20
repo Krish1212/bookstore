@@ -61,4 +61,8 @@ export class HomePage {
     this.navCtrl.setRoot('login');
   }
 
+  createEntry(){
+    this.navCtrl.push('addEntry');
+  }
+
 }

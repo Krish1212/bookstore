@@ -15,6 +15,9 @@
 </ion-header>
 
 <ion-content padding>
+  <ion-fab bottom right>
+    <button ion-fab mini (click)="createEntry()"><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
   <ion-item>
     <h3>Welcome {{ (userProfile)?.username }}</h3>
   </ion-item>
