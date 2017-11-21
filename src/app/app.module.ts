@@ -16,6 +16,7 @@ import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
 
 import { FIREBASE_CONFIG } from './app.firebase.config';
+import { BooksProvider } from '../providers/books/books';
 
 
 @NgModule({
@@ -46,7 +47,8 @@ import { FIREBASE_CONFIG } from './app.firebase.config';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     NgauthProvider,
-    ShareProvider
+    ShareProvider,
+    BooksProvider
   ]
 })
 export class AppModule {}

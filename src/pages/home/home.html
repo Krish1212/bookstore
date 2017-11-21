@@ -7,7 +7,7 @@
       Book Store
     </ion-title>
     <ion-buttons end>
-      <button ion-button clear (click)="signOut()">
+      <button ion-button clear icon-right (click)="signOut()">
         <ion-icon name="ios-log-out"></ion-icon>
       </button>
     </ion-buttons>
@@ -15,7 +15,7 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-fab bottom right>
+  <ion-fab bottom right *ngIf="((userProfile?.role) === 'Seller')">
     <button ion-fab mini (click)="createEntry()"><ion-icon name="add"></ion-icon></button>
   </ion-fab>
   <ion-item>

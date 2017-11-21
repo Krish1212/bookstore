@@ -20,34 +20,38 @@
       <ion-label floating>Author</ion-label>
       <ion-input #author formControlName="author" type="text" [class.invalid]="!newEntryForm.controls.author.valid && newEntryForm.controls.author.touched"></ion-input>
     </ion-item>
-    <ion-item class="error-message" *ngIf="newEntryForm.controls.author.hasError('required') && newEntryForm.controls.title.touched">
+    <ion-item class="error-message" *ngIf="newEntryForm.controls.author.hasError('required') && newEntryForm.controls.author.touched">
       Author name is required
     </ion-item>
     <ion-item>
       <ion-label floating>Publication Year</ion-label>
       <ion-datetime #year formControlName="year" displayFormat="YYYY" [class.invalid]="!newEntryForm.controls.year.valid && newEntryForm.controls.year.touched"></ion-datetime>
     </ion-item>
-    <ion-item class="error-message" *ngIf="newEntryForm.controls.year.hasError('required') && newEntryForm.controls.title.touched">
+    <ion-item class="error-message" *ngIf="newEntryForm.controls.year.hasError('required') && newEntryForm.controls.year.touched">
       Publication year is required
     </ion-item>
-    <ion-item class="error-message" *ngIf="newEntryForm.controls.year.hasError('maxLength') && newEntryForm.controls.title.touched">
+    <ion-item class="error-message" *ngIf="newEntryForm.controls.year.hasError('maxLength') && newEntryForm.controls.year.touched">
       Publication year should be maximum of 4 characters
     </ion-item>
     <ion-item>
       <ion-label floating>Sales Price</ion-label>
-      <ion-input *ngIf="platform.is('android')" inputMode="numeric" pattern="[0-9]" min="0" #salesprice formControlName="salesprice" type="number" [class.invalid]="!newEntryForm.controls.salesprice.valid && newEntryForm.controls.salesprice.touched"></ion-input>
-      <ion-input *ngIf="platform.is('ios')" inputMode="numeric" pattern="[0-9]" min="0" #salesprice formControlName="salesprice" type="tel" [class.invalid]="!newEntryForm.controls.salesprice.valid && newEntryForm.controls.salesprice.touched"></ion-input>
+      <ion-input inputMode="numeric" #salesprice formControlName="salesprice" type="number" [class.invalid]="!newEntryForm.controls.salesprice.valid && newEntryForm.controls.salesprice.touched"></ion-input>
     </ion-item>
     <ion-item class="error-message" *ngIf="newEntryForm.controls.salesprice.hasError('required') && newEntryForm.controls.salesprice.touched">
-      Sales Price is required and should be a valid number
+      Sales Price is required
+    </ion-item>
+    <ion-item class="error-message" *ngIf="newEntryForm.controls.salesprice.hasError('pattern') && newEntryForm.controls.salesprice.touched">
+      Sales Price should be a valid number
     </ion-item>
     <ion-item>
       <ion-label floating>Lending Price</ion-label>
-      <ion-input *ngIf="platform.is('android')" inputMode="numeric" pattern="[0-9]" min="0" #lendprice formControlName="lendprice" type="number" [class.invalid]="!newEntryForm.controls.lendprice.valid && newEntryForm.controls.lendprice.touched"></ion-input>
-      <ion-input *ngIf="platform.is('ios')" inputMode="numeric" pattern="[0-9]" min="0" #lendprice formControlName="lendprice" type="tel" [class.invalid]="!newEntryForm.controls.lendprice.valid && newEntryForm.controls.lendprice.touched"></ion-input>
+      <ion-input inputMode="numeric" #lendprice formControlName="lendprice" type="number" [class.invalid]="!newEntryForm.controls.lendprice.valid && newEntryForm.controls.lendprice.touched"></ion-input>
     </ion-item>
     <ion-item class="error-message" *ngIf="newEntryForm.controls.lendprice.hasError('required') && newEntryForm.controls.lendprice.touched">
-      Lending Price is required and should be a valid number
+      Lending Price is required
+    </ion-item>
+    <ion-item class="error-message" *ngIf="newEntryForm.controls.lendprice.hasError('pattern') && newEntryForm.controls.lendprice.touched">
+      Lending Price should be a valid number
     </ion-item>
     <button ion-button block [disabled]="!newEntryForm.valid" (click)="createEntry()">Create Entry</button>
   </form>
