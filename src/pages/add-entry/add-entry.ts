@@ -14,9 +14,6 @@ import { Newbook } from '../../models/newbook';
   templateUrl: 'add-entry.html',
 })
 export class AddEntryPage {
-  async getUserId() {
-    return await this.afAuth.currentUser;
-  }
   newEntryForm:FormGroup;
   newEntrybook = {} as Newbook;
   title:AbstractControl;
@@ -52,23 +49,24 @@ export class AddEntryPage {
   createEntry(){
     this.loading = this.loadingCtrl.create({
       spinner: 'bubbles',
-      content: 'User registration...in progress',
+      content: 'New book creation...in progress',
       dismissOnPageChange: true,
     });
     if(this.newEntryForm.valid){
-      this.getUserId().catch(userId => {
-        this.userId = (userId) ? userId : '';
-      });
+      this.userId = this.afAuth.currentUser;
+      //console.log(this.userId);
       this.newEntrybook = {'title':this.title.value,'authors':this.authors.value,'pubyear':this.year.value,'salesprice':this.salesprice.value,'lendprice':this.lendprice.value,'userId':this.userId};
       this.ngBook.createNewbook(this.newEntrybook).subscribe((success) => {
-        this.alertCtrl.create({
-          message: 'New Entry Created',
-          buttons: [{
-            text: 'OK',
-            role: 'cancel'
-          }]
-        }).present();
-        this.navCtrl.pop();
+        this.loading.dismiss().then(() => {
+          this.alertCtrl.create({
+            message: 'New Entry Created',
+            buttons: [{
+              text: 'OK',
+              role: 'cancel'
+            }]
+          }).present();
+          this.navCtrl.popToRoot();
+        });
       }, (failure) => {
         this.loading.dismiss().then(() => {
           this.alertCtrl.create({
