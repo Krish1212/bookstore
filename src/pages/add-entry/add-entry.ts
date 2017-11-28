@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, Events, Loading, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, Loading, LoadingController } from 'ionic-angular';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 
 import { NgauthProvider } from '../../providers/ngauth/ngauth';
@@ -36,8 +36,8 @@ export class AddEntryPage {
         'title': ['', Validators.compose([Validators.required])],
         'author':['', Validators.compose([Validators.required])],
         'year':['', Validators.compose([Validators.required, Validators.maxLength(4)])],
-        'salesprice': ['', Validators.compose([Validators.required, Validators.pattern('[^\-][0-9]+')])],
-        'lendprice': ['', Validators.compose([Validators.required, Validators.pattern('[^\-][0-9]+')])]
+        'salesprice': ['', Validators.compose([Validators.required, Validators.pattern('[^\-0][0-9]*')])],
+        'lendprice': ['', Validators.compose([Validators.required, Validators.pattern('[^\-0][0-9]*')])]
       });
       this.title = this.newEntryForm.controls['title'];
       this.authors = this.newEntryForm.controls['author'];
@@ -57,6 +57,7 @@ export class AddEntryPage {
       //console.log(this.userId);
       this.newEntrybook = {'title':this.title.value,'authors':this.authors.value,'pubyear':this.year.value,'salesprice':this.salesprice.value,'lendprice':this.lendprice.value,'userId':this.userId};
       this.ngBook.createNewbook(this.newEntrybook).subscribe((success) => {
+        this.navCtrl.popToRoot();
         this.loading.dismiss().then(() => {
           this.alertCtrl.create({
             message: 'New Entry Created',
@@ -65,7 +66,6 @@ export class AddEntryPage {
               role: 'cancel'
             }]
           }).present();
-          this.navCtrl.popToRoot();
         });
       }, (failure) => {
         this.loading.dismiss().then(() => {

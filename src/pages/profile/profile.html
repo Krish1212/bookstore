@@ -9,55 +9,58 @@
   <form [formGroup]="profileForm">
     <ion-item>
       <ion-label floating>Username</ion-label>
-      <ion-input #username formControlName="username" [class.invalid]="!profileForm.controls.username.valid"></ion-input>
+      <ion-input #username formControlName="username" [class.invalid]="!profileForm.controls.username.valid && profileForm.controls.username.touched"></ion-input>
     </ion-item>
-    <ion-item class="error-message" *ngIf="!profileForm.controls.username.valid">
+    <ion-item class="error-message" *ngIf="profileForm.controls.username.hasError('required') && profileForm.controls.username.touched">
+      Username is required
+    </ion-item>
+    <ion-item class="error-message" *ngIf="profileForm.controls.username.hasError('minLength') && profileForm.controls.username.touched">
       Username should be 6 characters long
     </ion-item>
-
+  
     <ion-item>
       <ion-label floating>First Name</ion-label>
-      <ion-input #firstName formControlName="firstName" [class.invalid]="!profileForm.controls.firstName.valid"></ion-input>
+      <ion-input #firstName formControlName="firstName" [class.invalid]="!profileForm.controls.firstName.valid && profileForm.controls.firstName.touched"></ion-input>
     </ion-item>
-    <ion-item class="error-message" *ngIf="!profileForm.controls.firstName.valid">
+    <ion-item class="error-message" *ngIf="profileForm.controls.firstName.hasError('required') && profileForm.controls.firstName.touched">
       First Name is required
     </ion-item>
 
     <ion-item>
       <ion-label floating>Last Name</ion-label>
-      <ion-input #lastName formControlName="lastName" [class.invalid]="!profileForm.controls.lastName.valid"></ion-input>
+      <ion-input #lastName formControlName="lastName" [class.invalid]="!profileForm.controls.lastName.valid && profileForm.controls.lastName.touched"></ion-input>
     </ion-item>
-    <ion-item class="error-message" *ngIf="!profileForm.controls.lastName.valid">
+    <ion-item class="error-message" *ngIf="profileForm.controls.lastName.hasError('required') && profileForm.controls.lastName.touched">
       Last Name is required
     </ion-item>
 
     <ion-item>
       <ion-label floating>Role</ion-label>
-      <ion-select #role formControlName="role" [class.invalid]="!profileForm.controls.role.valid">
+      <ion-select #role formControlName="role" [class.invalid]="!profileForm.controls.role.valid && profileForm.controls.role.touched">
         <ion-option name="buyer">Buyer</ion-option>
         <ion-option name="seller">Seller</ion-option>
       </ion-select>
     </ion-item>
-    <ion-item class="error-message" *ngIf="!profileForm.controls.role.valid">
+    <ion-item class="error-message" *ngIf="profileForm.controls.role.hasError('required') && profileForm.controls.role.touched">
       Role is required
     </ion-item>
 
     <ion-item>
       <ion-label floating>Gender</ion-label>
-      <ion-select #gender formControlName="gender" [class.invalid]="!profileForm.controls.gender.valid">
+      <ion-select #gender formControlName="gender" [class.invalid]="!profileForm.controls.gender.valid && profileForm.controls.gender.touched">
         <ion-option name="male">Male</ion-option>
         <ion-option name="female">Female</ion-option>
       </ion-select>
     </ion-item>
-    <ion-item class="error-message" *ngIf="!profileForm.controls.gender.valid">
+    <ion-item class="error-message" *ngIf="profileForm.controls.gender.hasError('required') && profileForm.controls.gender.touched">
       Gender is required
     </ion-item>
 
     <ion-item>
       <ion-label floating>Birthday</ion-label>
-      <ion-datetime #birthday formControlName="birthday" [class.invalid]="!profileForm.controls.gender.valid"></ion-datetime>
+      <ion-datetime #birthday formControlName="birthday" [class.invalid]="!profileForm.controls.gender.valid && profileForm.controls.gender.touched"></ion-datetime>
     </ion-item>
-    <ion-item class="error-message" *ngIf="!profileForm.controls.gender.valid">
+    <ion-item class="error-message" *ngIf="profileForm.controls.gender.hasError('required') && profileForm.controls.gender.touched">
       Birthday is required
     </ion-item>
     <button ion-button block (click)="createProfile()">Create Profile</button>

@@ -32,7 +32,7 @@ export class LoginPage {
       this.menuCtrl.enable(false);
       this.loginForm = this.formBuilder.group({
         'username': ['', Validators.compose([Validators.required,EmailValidator.isValid])],
-        'password': ['', Validators.compose([Validators.minLength(6),Validators.required])]
+        'password': ['', Validators.compose([Validators.required,Validators.minLength(6)])]
       });
       this.username = this.loginForm.controls['username'];
       this.password = this.loginForm.controls['password'];
