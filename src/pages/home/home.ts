@@ -13,6 +13,7 @@ export class HomePage {
   userProfile:any = {};
   loading:Loading;
   booksList:any = [];
+  upvote:Boolean;
   constructor(public navCtrl: NavController, 
     private ngAuth: NgauthProvider, 
     private loadingCtrl: LoadingController, 
@@ -26,7 +27,7 @@ export class HomePage {
       this.loading = this.loadingCtrl.create({
         spinner: 'bubbles',
         content: 'Loading User Profile...Please wait',
-        dismissOnPageChange: true
+        duration:3000,
       });
       this.getProfile().then((data) => {
         this.loading.dismiss().then((data) => {
@@ -90,6 +91,15 @@ export class HomePage {
 
   createEntry(){
     this.navCtrl.push('addEntry');
+  }
+  openbook(){
+
+  }
+  likebook(){
+    //todo
+    //upvote should be restricted to the current book
+    //and also to the current logged in user
+    this.upvote = (this.upvote) ? false : true;
   }
 
 }

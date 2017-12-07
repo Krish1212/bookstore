@@ -22,41 +22,38 @@
     <h3>Welcome {{ (userProfile)?.username }}</h3>
   </ion-item>
   <ion-list-header>
-      Available list of books in your place
-    </ion-list-header>
-  <ion-list *ngFor="let book of booksList">
-    <ion-item-sliding>
-        <ion-item>
-          <ion-avatar item-start>
-            <img src="http://placehold.it/200">
-          </ion-avatar>
-          <h3>{{book.title}}</h3>
-          <p>{{book.authors}} ({{book.pubyear}})</p>
-          <p>Posted by: some1</p>
-          <ion-row style="font-size:smaller">
-            <ion-col width-30>
-                <p>LP: ₹{{book.lendprice}}</p>
-            </ion-col>
-            <ion-col width-30>
-                <p>SP: ₹{{book.salesprice}}</p>
-            </ion-col>
-          </ion-row>
-        </ion-item>
-        <ion-item-options>
-          <button ion-button icon-start color="light">
-            <ion-icon name="ios-more"></ion-icon>
-            More
-          </button>
-          <button ion-button icon-start color="secondary">
-              <ion-icon name="ios-heart"></ion-icon>
-              Like
-          </button>
-          <button ion-button icon-start color="primary">
-            <ion-icon name="call"></ion-icon>
-            Call
-          </button>
-        </ion-item-options>
-    </ion-item-sliding>
-  </ion-list>
+    List of books available in your place
+  </ion-list-header>
+  <ion-card *ngFor="let book of booksList">
+    <ion-item>
+      <ion-thumbnail item-start>
+        <img src="http://via.placeholder.com/400">
+      </ion-thumbnail>
+      <h3>{{book.title}}</h3>
+      <p>{{book.authors}} • {{book.pubyear}}</p>
+      <p>LP: ₹{{book.lendprice}} • SP: ₹{{book.salesprice}}</p>
+    </ion-item>
+    <ion-row no-padding>
+      <ion-col col-4>
+        <button ion-button small clear icon-left (click)="openbook()">
+          <ion-icon name="ios-book-outline"></ion-icon>
+          More
+        </button>
+      </ion-col>
+      <ion-col col-4>
+        <button ion-button small clear icon-left (click)="likebook()">
+          <ion-icon name="ios-heart" *ngIf="upvote"></ion-icon>
+          <ion-icon name="ios-heart-outline" *ngIf="!upvote"></ion-icon>
+          Like
+        </button>
+      </ion-col>
+      <ion-col col-4>
+        <button ion-button small clear icon-left (click)="lendbook()">
+          <ion-icon name="ios-cart"></ion-icon>
+          Lend
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-card>
 
 </ion-content>
